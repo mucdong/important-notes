@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Người Gác Đèn Cuối Cùng</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Noto+Serif:ital,wght@0,400;0,700;1,400&family=Be+Vietnam+Pro:wght@400;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body class="title">
+  <div id="app">
+    <header id="hud" hidden>
+      <div class="hud-day" id="hud-day">Ngày 1</div>
+      <div class="hud-stats">
+        <div class="stat" title="Dầu thắp đèn">
+          <span class="label">Dầu</span>
+          <div class="pips" id="pip-oil"></div>
+        </div>
+        <div class="stat" title="Lương thực">
+          <span class="label">Lương thực</span>
+          <div class="pips" id="pip-food"></div>
+        </div>
+        <div class="stat" title="Tinh thần — về 0 là mất tất cả">
+          <span class="label">Tinh thần</span>
+          <div class="bar"><div class="bar-fill" id="bar-sanity"></div></div>
+        </div>
+        <div class="stat small" id="hud-radio" title="Tình trạng radio">Radio: rè</div>
+        <div class="stat small" id="hud-dreams" title="Số giấc mơ đã có">Giấc mơ: 0</div>
+      </div>
+      <div class="hud-buttons">
+        <button class="icon-btn" id="btn-journal" title="Nhật ký">Nhật ký</button>
+        <button class="icon-btn" id="btn-sound" title="Âm thanh">Âm thanh: tắt</button>
+      </div>
+    </header>
+
+    <main id="stage">
+      <section id="scene" aria-hidden="true">
+        <svg viewBox="0 0 400 400" preserveAspectRatio="xMidYMid slice">
+          <defs>
+            <linearGradient id="sky" x1="0" y1="0" x2="0" y2="1">
+              <stop offset="0%" class="sky-top" />
+              <stop offset="100%" class="sky-bottom" />
+            </linearGradient>
+            <linearGradient id="beamGrad" x1="0" y1="0" x2="1" y2="0">
+              <stop offset="0%" stop-color="#fff6c8" stop-opacity="0.85" />
+              <stop offset="100%" stop-color="#fff6c8" stop-opacity="0" />
+            </linearGradient>
+            <radialGradient id="glow">
+              <stop offset="0%" stop-color="#fff3b0" stop-opacity="1" />
+              <stop offset="100%" stop-color="#fff3b0" stop-opacity="0" />
+            </radialGradient>
+          </defs>
+          <rect width="400" height="400" fill="url(#sky)" />
+          <g id="stars"></g>
+          <circle id="moon" cx="320" cy="70" r="16" fill="#e8e4cf" />
+          <circle id="sun" cx="80" cy="90" r="22" fill="#ffd27a" />
+
+          <g id="ship">
+            <circle cx="70" cy="252" r="2.6" fill="#ffdf8a" />
+            <circle cx="70" cy="252" r="9" fill="url(#glow)" opacity="0.6" />
+          </g>
+
+          <rect y="250" width="400" height="150" class="sea" />
+          <path class="wave w1" d="M0 262 Q 25 257 50 262 T 100 262 T 150 262 T 200 262 T 250 262 T 300 262 T 350 262 T 400 262 T 450 262 T 500 262 V 400 H 0 Z" />
+          <path class="wave w2" d="M0 285 Q 30 279 60 285 T 120 285 T 180 285 T 240 285 T 300 285 T 360 285 T 420 285 T 480 285 V 400 H 0 Z" />
+
+          <path class="island" d="M210 300 Q 240 255 290 258 Q 340 252 380 300 Z" />
+          <g id="tower">
+            <polygon points="283,262 317,262 311,150 289,150" class="tower-body" />
+            <polygon points="285.5,240 314.5,240 313.6,225 286.4,225" class="tower-stripe" />
+            <polygon points="287.6,200 312.4,200 311.7,185 288.3,185" class="tower-stripe" />
+            <rect x="284" y="146" width="32" height="5" class="tower-dark" />
+            <rect x="290" y="128" width="20" height="18" class="lamp-room" />
+            <polygon points="286,128 314,128 300,114" class="tower-dark" />
+            <rect x="296" y="248" width="8" height="14" class="tower-dark" />
+          </g>
+          <g id="beam">
+            <polygon points="300,137 -120,95 -120,180" fill="url(#beamGrad)" />
+          </g>
+          <circle id="lamp-glow" cx="300" cy="137" r="26" fill="url(#glow)" />
+        </svg>
+      </section>
+
+      <section id="panel">
+        <div id="story" aria-live="polite"></div>
+        <div id="choices"></div>
+      </section>
+    </main>
+
+    <div id="overlay" hidden>
+      <div class="overlay-card">
+        <h2 id="overlay-title"></h2>
+        <div id="overlay-body"></div>
+        <button class="choice" id="overlay-close">Đóng</button>
+      </div>
+    </div>
+  </div>
+  <script src="game.js"></script>
+</body>
+</html>
